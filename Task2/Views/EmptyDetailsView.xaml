@@ -1,0 +1,13 @@
+﻿<Page x:Class="Task2.Views.EmptyDetailsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      Width="Auto" Height="Auto"
+      Title="DetailsView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <TextBlock Grid.Row="0" HorizontalAlignment="Stretch" Height="Auto" Margin="12" TextAlignment="Center" LineStackingStrategy="BlockLineHeight" TextWrapping="Wrap" Text="Не выбран каталог для просмотра деталей. Выберите каталог в панели слева." VerticalAlignment="Center" FontSize="18" TextTrimming="CharacterEllipsis" Foreground="White"/>
+    </Grid>
+</Page>

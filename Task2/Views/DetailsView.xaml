@@ -1,0 +1,68 @@
+﻿<Page x:Class="Task2.Views.DetailsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1800"
+      Title="DetailsView">
+
+    <ScrollViewer>
+        <Grid Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="124"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Margin="12" Stretch="Fill" Width="100" Height="100" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource CoverStyle}" />
+                <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" Height="Auto" Margin="12" TextAlignment="Center" LineStackingStrategy="BlockLineHeight" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Top" FontSize="21" TextTrimming="CharacterEllipsis" Foreground="#FF444444"/>
+            </Grid>
+            <TextBlock Grid.Row="1" Foreground="{StaticResource AccentBaseColorBrush}" Text="Описание:" FontSize="16" Margin="12,0" Opacity="0.75"/>
+            <TextBlock Grid.Row="2" Foreground="#FF444444" Text="{Binding Description}" FontSize="17" Margin="24,12" TextWrapping="Wrap"/>
+            <TextBlock Grid.Row="3" Foreground="{StaticResource AccentBaseColorBrush}" Text="Детали:" FontSize="16" Margin="12,0" Opacity="0.75"/>
+            <ListBox Grid.Row="4" Margin="24,12" ItemsSource="{Binding Options}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                            <TextBlock Grid.Column="0" Foreground="#FF444444" Text="{Binding Key, Converter={StaticResource UpperNameConvertor}}" FontSize="17"/>
+                            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                            <Separator Grid.Column="1" Foreground="#FF444444" Margin="6,0" Opacity="0.75"/>
+                            <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                            <TextBlock Grid.Column="2" Foreground="#FF444444" Text="{Binding Value}" FontSize="17"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <TextBlock Grid.Row="5" Foreground="{StaticResource AccentBaseColorBrush}" Text="Превью:" FontSize="16" Margin="12,0" Opacity="0.75" Visibility="{Binding IsVisiblePreview, Converter={StaticResource VisibilityToBooleanConvertor}}"/>
+            <mah:FlipView Grid.Row="6" x:Name="FlipViewTest" Margin="12"
+                           ItemsSource="{Binding Previews}"
+                           IsBannerEnabled="False"
+                           Foreground="{DynamicResource WhiteBrush}"
+                           SelectedIndex="0"
+                           Height="250" Visibility="{Binding IsVisiblePreview, Converter={StaticResource VisibilityToBooleanConvertor}}">
+                <mah:FlipView.ItemTemplate>
+                    <DataTemplate>
+                        <Image VerticalAlignment="Stretch" Height="250" Source="{Binding}" Stretch="UniformToFill" />
+                    </DataTemplate>
+                </mah:FlipView.ItemTemplate>
+            </mah:FlipView>
+        </Grid>
+    </ScrollViewer>
+</Page>

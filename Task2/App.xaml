@@ -1,0 +1,26 @@
+﻿<Application x:Class="Task2.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Task2"
+             xmlns:convertors="clr-namespace:Task2.Infrastructure.Convertors">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <local:AppBootstrapper x:Key="Bootstrapper" />
+                </ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/baselight.xaml" />
+                <ResourceDictionary Source="Infrastructure/Styles/MainTheme.xaml" />
+                <ResourceDictionary Source="Infrastructure/Styles/ListBoxItems.xaml" />
+                <ResourceDictionary Source="Infrastructure/Styles/ImagesStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <convertors:UpperNameConvertor x:Key="UpperNameConvertor" />
+            <convertors:VisibilityToBooleanConvertor x:Key="VisibilityToBooleanConvertor" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

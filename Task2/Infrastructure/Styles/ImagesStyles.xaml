@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="CoverStyle" TargetType="{x:Type Image}">
+        <Setter Property="Source" Value="{Binding ImageCover}" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ImageCover}" Value="{x:Null}">
+                <Setter Property="Source" Value="/Infrastructure/Images/no_photo.png" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

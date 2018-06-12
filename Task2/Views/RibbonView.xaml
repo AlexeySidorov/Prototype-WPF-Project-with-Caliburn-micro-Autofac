@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Task2.Views.RibbonView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cal="http://www.caliburnproject.org"
+        mc:Ignorable="d" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+    <Grid Background="#FFCDCECA" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+        <ListBox x:Name="Ribbon" ItemsSource="{Binding Ribbon}" SelectedIndex="{Binding SelectedIndex}" ItemContainerStyle="{StaticResource CatalogListBoxItemStyle}" 
+                 HorizontalAlignment="Left" VerticalAlignment="Top"  Background="#FFCECDCA" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" BorderBrush="Transparent" 
+                 BorderThickness="0" cal:Message.Attach="[Event SelectionChanged] = [Action SelectCatalog($this)]">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:Name="Catalog_Preview" VerticalAlignment="Top" HorizontalAlignment="Stretch" Width="290" Margin="6,3,6,3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Rectangle x:Name="BG1" Fill="White" HorizontalAlignment="Stretch" StrokeThickness="0" VerticalAlignment="Stretch" Grid.RowSpan="2" Grid.ColumnSpan="2" RadiusX="5" RadiusY="5"/>
+                        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                        <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" HorizontalAlignment="Left" Height="Auto" MaxHeight="56" Margin="0,6,6,0"  LineStackingStrategy="BlockLineHeight" LineHeight="20" TextWrapping="Wrap" Text="{Binding Title.Default}" VerticalAlignment="Top" FontSize="15" TextTrimming="CharacterEllipsis" Foreground="#FF444444"/>
+                            <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Left" Grid.Column="0" TextWrapping="NoWrap" Margin="0,6,6,0" Text="Количество платформ: " VerticalAlignment="Top" TextTrimming="CharacterEllipsis" Foreground="#FF444444" Opacity="0.75"/>
+                                <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                                <TextBlock HorizontalAlignment="Left" Grid.Column="1" TextWrapping="NoWrap" Margin="0,6,6,0" Text="{Binding PlatformCount}" VerticalAlignment="Top" TextTrimming="CharacterEllipsis" Foreground="#FF444444" Opacity="0.75"/>
+                            </Grid>
+                        </Grid>
+                        <!-- ReSharper disable once Xaml.MissingGridIndex -->
+                        <Image Margin="6" Stretch="Fill" Width="90" Height="90" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource CoverStyle}" />
+                        <!-- ReSharper disable once Xaml.MissingGridIndex -->
+                        <Rectangle x:Name="FooterBG1" Fill="#FFFAF9F6" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Top" StrokeThickness="0" Grid.ColumnSpan="2" RadiusX="5" RadiusY="5"/>
+                        <!-- ReSharper disable once Xaml.MissingGridIndex -->
+                        <Rectangle x:Name="FooterBorder1" Fill="#FFE8E8E8" Height="1" VerticalAlignment="Top" Grid.Row="1" StrokeThickness="0" Margin="0" Grid.ColumnSpan="2"/>
+                        <!-- ReSharper disable once Xaml.MissingGridIndex -->
+                        <Grid x:Name="FooterLine7" Margin="0,35,0,0" Grid.Row="1" Grid.ColumnSpan="2">
+                            <Rectangle x:Name="FooterLine4" Fill="#FFE8E8E8" Height="1" VerticalAlignment="Bottom" StrokeThickness="0" RadiusX="5" RadiusY="5"/>
+                            <Rectangle x:Name="FooterLine5" Fill="#FFE8E8E8" Height="1" VerticalAlignment="Bottom" StrokeThickness="0" Margin="0,0,0,2" RadiusX="5" RadiusY="5"/>
+                            <Rectangle x:Name="FooterLine6" Fill="#FFE8E8E8" Height="1" VerticalAlignment="Bottom" StrokeThickness="0" Margin="0,0,0,4" RadiusX="5" RadiusY="5"/>
+                        </Grid>
+                        <!-- ReSharper disable once Xaml.MissingGridIndex -->
+                        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                        <TextBlock Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Left" Height="Auto" MaxHeight="40" TextWrapping="WrapWithOverflow" Margin="6" Text="{Binding Description.Default}" VerticalAlignment="Top" TextTrimming="CharacterEllipsis" Foreground="#FF444444" Opacity="0.75"/>
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ListBox.IsSelected" Value="True"/>
+                                <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="Catalog_Preview" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                            <Setter Property="ListBox.Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                        </MultiTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBoxItem}}, Path=IsEnabled}" Value="False">
+                            <Setter Property="ListBox.Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>
